@@ -4,4 +4,67 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Emotion {
+  STRESSED
+  HAPPY
+  EXCITED
+  ANXIOUS
+  FRUSTRATED
+  PROUD
+  LONELY
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  vents     Vent[]
+  comments  Comment[]
+  votes     Vote[]
+}
+
+model Vent {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  emotion   Emotion
+  createdAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id])
+
+  comments  Comment[]
+  votes     Vote[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  ventId    String
+  vent      Vent     @relation(fields: [ventId], references: [id])
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model Vote {
+  id       String @id @default(cuid())
+  value    Int
+
+  ventId   String
+  vent     Vent   @relation(fields: [ventId], references: [id])
+
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, ventId])
 }
