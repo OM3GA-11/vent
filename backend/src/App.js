@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const protect = require("./middleware/authMiddleware");
 const ventRoutes = require("./routes/ventRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.get("/api/profile", protect, (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/vents", ventRoutes);
+app.use("/api/comments", commentRoutes);
 
 module.exports = app;
