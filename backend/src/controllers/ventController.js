@@ -31,7 +31,10 @@ const createVent = async (req, res) => {
 
 const getAllVents = async (req, res) => {
   try {
+    const { emotion } = req.query;
+
     const vents = await prisma.vent.findMany({
+      where: emotion ? { emotion } : {},
       include: {
         author: {
           select: {
@@ -39,6 +42,7 @@ const getAllVents = async (req, res) => {
             username: true,
           },
         },
+        votes: true,
         _count: {
           select: {
             comments: true,
@@ -84,6 +88,7 @@ const getVentById = async (req, res) => {
             },
           },
         },
+        votes: true,
       },
     });
 
