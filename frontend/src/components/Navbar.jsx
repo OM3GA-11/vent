@@ -3,6 +3,7 @@ import useAuthStore from "../store/authStore";
 
 function Navbar() {
   const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
   const logout = useAuthStore((state) => state.logout);
 
   return (
@@ -56,7 +57,7 @@ function Navbar() {
   Create Vent
 </Link>
 
-          {user ? (
+          {(user || token) ? (
             <>
               <Link
                 to="/profile"

@@ -5,3 +5,9 @@ export const getVents = async () => {
 
   return response.data;
 };
+
+export const createVent = async (ventData) =>{
+    const response = await api.post("/vents",ventData);
+
+    return response.data;
+};
