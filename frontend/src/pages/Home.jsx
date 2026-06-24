@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 import EmotionFilter from "../components/EmotionFilter";
 import VentCard from "../components/VentCard";
@@ -6,11 +7,16 @@ import VentCard from "../components/VentCard";
 import { getVents } from "../api/vent";
 
 function Home() {
+  const [selectedEmotion, setSelectedEmotion] =
+  useState("");
   const {
   data: vents,
   isLoading,
   error,
-} = useQuery({ queryKey: ["vents"], queryFn: getVents, });
+} = useQuery({
+  queryKey: ["vents", selectedEmotion],
+  queryFn: () => getVents(selectedEmotion),
+});
   return (
     <div className="space-y-10">
       
@@ -19,7 +25,7 @@ function Home() {
 
       <section className="relative pb-6 pt-2">
         <div
-            className="
+            className="pointer-events-none
                     absolute
                     -left-20
                     -top-10
@@ -44,7 +50,10 @@ function Home() {
 
       {/* Filters */}
       <section>
-        <EmotionFilter />
+        <EmotionFilter
+          selectedEmotion={selectedEmotion}
+          setSelectedEmotion={setSelectedEmotion}
+        />
       </section>
 
       {/* Feed */}
@@ -67,6 +76,11 @@ function Home() {
             vent={vent}
           />
         ))}
+        {!isLoading && vents?.length === 0 && (
+          <p className="text-slate-400">
+            No vents found for this emotion.
+          </p>
+        )}
       </section>
     </div>
   );

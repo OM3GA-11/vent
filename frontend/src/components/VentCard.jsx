@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 function VentCard({ vent }) {
   return (
+    <Link to={`/vents/${vent.id}`} className="block">
     <div
       className="
         rounded-2xl
@@ -42,6 +45,7 @@ function VentCard({ vent }) {
         </span>
       </div>
     </div>
+    </Link>
   );
 }
 
