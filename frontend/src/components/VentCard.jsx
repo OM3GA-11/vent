@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { voteVent } from "../api/vote";
 
 function VentCard({ vent }) {
+  const queryClient = useQueryClient();
+
+  const voteMutation = useMutation({
+  mutationFn: voteVent,
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({
+      queryKey: ["vents"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["profile"],
+    });
+  },
+});
+
   return (
     <Link to={`/vents/${vent.id}`} className="block">
     <div
@@ -38,7 +56,39 @@ function VentCard({ vent }) {
       </div>
 
       <div className="flex gap-4 text-slate-400">
-        <span>▲ {vent._count.votes}</span>
+        <div className="flex items-center gap-2">
+
+  <button
+    onClick={(e) => {
+      e.preventDefault();
+
+      voteMutation.mutate({
+        ventId: vent.id,
+        value: 1,
+      });
+    }}
+    className="transition hover:text-violet-400"
+  >
+    ▲
+  </button>
+
+  <span>{vent.voteScore}</span>
+
+  <button
+    onClick={(e) => {
+      e.preventDefault();
+
+      voteMutation.mutate({
+        ventId: vent.id,
+        value: -1,
+      });
+    }}
+    className="transition hover:text-red-400"
+  >
+    ▼
+  </button>
+
+</div>
 
         <span>
           💬 {vent._count.comments}

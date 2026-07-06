@@ -55,7 +55,15 @@ const getAllVents = async (req, res) => {
       },
     });
 
-    res.json(vents);
+    const ventsWithScore = vents.map((vent) => ({
+  ...vent,
+  voteScore: vent.votes.reduce(
+    (sum, vote) => sum + vote.value,
+    0
+  ),
+}));
+
+    res.json(ventsWithScore);
   } catch (error) {
     console.error(error);
 
@@ -92,13 +100,21 @@ const getVentById = async (req, res) => {
       },
     });
 
+    const ventWithScore = {
+  ...vent,
+  voteScore: vent.votes.reduce(
+    (sum, vote) => sum + vote.value,
+    0
+  ),
+};
+
     if (!vent) {
       return res.status(404).json({
         message: "Vent not found",
       });
     }
 
-    res.json(vent);
+    res.json(ventWithScore);
   } catch (error) {
     console.error(error);
 
