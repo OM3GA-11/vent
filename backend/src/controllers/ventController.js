@@ -100,6 +100,13 @@ const getVentById = async (req, res) => {
       },
     });
 
+
+    if (!vent) {
+      return res.status(404).json({
+        message: "Vent not found",
+      });
+    }
+
     const ventWithScore = {
   ...vent,
   voteScore: vent.votes.reduce(
@@ -108,11 +115,7 @@ const getVentById = async (req, res) => {
   ),
 };
 
-    if (!vent) {
-      return res.status(404).json({
-        message: "Vent not found",
-      });
-    }
+    
 
     res.json(ventWithScore);
   } catch (error) {

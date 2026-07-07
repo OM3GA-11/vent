@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { voteVent } from "../api/vote";
+import useAuthStore from "../store/authStore";
 
 function VentCard({ vent }) {
   const queryClient = useQueryClient();
+  const user = useAuthStore((state) => state.user);
+  const currentVote = vent.votes.find(
+  (vote) => vote.userId === user?.id
+);
 
   const voteMutation = useMutation({
   mutationFn: voteVent,
@@ -67,7 +72,11 @@ function VentCard({ vent }) {
         value: 1,
       });
     }}
-    className="transition hover:text-violet-400"
+    className={`transition ${
+  currentVote?.value === 1
+    ? "text-violet-500"
+    : "hover:text-violet-400"
+}`}
   >
     ▲
   </button>
@@ -83,7 +92,11 @@ function VentCard({ vent }) {
         value: -1,
       });
     }}
-    className="transition hover:text-red-400"
+    className={`transition ${
+  currentVote?.value === -1
+    ? "text-red-500"
+    : "hover:text-red-400"
+}`}
   >
     ▼
   </button>

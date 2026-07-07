@@ -5,6 +5,7 @@ import EmotionFilter from "../components/EmotionFilter";
 import VentCard from "../components/VentCard";
 
 import { getVents } from "../api/vent";
+import VentSkeleton from "../components/VentSkeleton";
 
 function Home() {
   const [selectedEmotion, setSelectedEmotion] =
@@ -59,9 +60,11 @@ function Home() {
       {/* Feed */}
       <section className="space-y-5">
         {isLoading && (
-          <p className="text-slate-400">
-            Loading vents...
-          </p>
+          <div className="space-y-5">
+            {[...Array(4)].map((_, index) => (
+              <VentSkeleton key={index} />
+            ))}
+          </div>
         )}
 
         {error && (
@@ -70,12 +73,13 @@ function Home() {
           </p>
         )}
 
-        {vents?.map((vent) => (
-          <VentCard
-            key={vent.id}
-            vent={vent}
-          />
-        ))}
+        {!isLoading &&
+  vents?.map((vent) => (
+    <VentCard
+      key={vent.id}
+      vent={vent}
+    />
+  ))}
         {!isLoading && vents?.length === 0 && (
           <p className="text-slate-400">
             No vents found for this emotion.

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/authStore";
+import TurbineLogo from "./TurbineLogo";
 
 function Navbar() {
   const user = useAuthStore((state) => state.user);
-  const token = useAuthStore((state) => state.token);
   const logout = useAuthStore((state) => state.logout);
 
   return (
@@ -15,9 +15,7 @@ function Navbar() {
           to="/"
           className="flex items-center gap-3"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 shadow-lg shadow-violet-500/20">
-            🌀
-          </div>
+          <TurbineLogo />
 
           <div>
             <h1 className="bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
@@ -57,7 +55,7 @@ function Navbar() {
   Create Vent
 </Link>
 
-          {(user || token) ? (
+          {user ? (
             <>
               <Link
                 to="/profile"

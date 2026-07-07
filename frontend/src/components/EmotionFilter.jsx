@@ -1,12 +1,7 @@
+import { EMOTIONS } from "../constants/emotions";
 const emotions = [
   { label: "All", value: "" },
-  { label: "😊 Happy", value: "HAPPY" },
-  { label: "😟 Stressed", value: "STRESSED" },
-  { label: "😰 Anxious", value: "ANXIOUS" },
-  { label: "🚀 Excited", value: "EXCITED" },
-  { label: "😤 Frustrated", value: "FRUSTRATED" },
-  { label: "🏆 Proud", value: "PROUD" },
-  { label: "😔 Lonely", value: "LONELY" },
+  ...EMOTIONS,
 ];
 
 function EmotionFilter({ selectedEmotion, setSelectedEmotion }) {

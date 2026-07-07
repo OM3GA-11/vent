@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EMOTIONS } from "../constants/emotions";
 
 import { createVent } from "../api/vent";
 
@@ -66,22 +67,24 @@ function CreateVent() {
           />
 
           <select
-            name="emotion"
-            value={formData.emotion}
-            onChange={handleChange}
-            className="w-full rounded-xl border border-white/10 bg-[#111827] p-4 outline-none focus:border-violet-500"
-          >
-            <option value="HAPPY">😊 Happy</option>
-            <option value="SAD">😔 Sad</option>
-            <option value="ANGRY">😡 Angry</option>
-            <option value="ANXIOUS">😰 Anxious</option>
-            <option value="STRESSED">😟 Stressed</option>
+              name="emotion"
+              value={formData.emotion}
+              onChange={handleChange}
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 outline-none focus:border-violet-500"
+            >
+              {EMOTIONS.map((emotion) => (
+                <option
+                  key={emotion.value}
+                  value={emotion.value}
+                >
+                  {emotion.label}
+                </option>
+              ))}
           </select>
 
           <button
             type="submit"
-            className="rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 px-6 py-3 font-medium"
-          >
+            className="w-full rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 px-6 py-3 font-medium transition hover:opacity-90"          >
             Publish Vent
           </button>
         </form>
