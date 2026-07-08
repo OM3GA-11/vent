@@ -39,8 +39,8 @@ function CreateVent() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-md">
-        <h1 className="mb-6 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-4xl font-bold text-transparent">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-8 backdrop-blur-md">
+        <h1 className="mb-6 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-3xl md:text-4xl font-bold text-transparent">
           Create a Vent
         </h1>
 
@@ -54,7 +54,7 @@ function CreateVent() {
             placeholder="What's on your mind?"
             value={formData.title}
             onChange={handleChange}
-            className="w-full rounded-xl border border-white/10 bg-white/5 p-4 outline-none focus:border-violet-500"
+            className="w-full rounded-xl border border-white/10 bg-white/5 p-3 md:p-4 outline-none focus:border-violet-500"
           />
 
           <textarea
@@ -84,7 +84,7 @@ function CreateVent() {
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 px-6 py-3 font-medium transition hover:opacity-90"          >
+            className="w-full rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 w-full px-6 py-3 md:w-auto font-medium transition hover:opacity-90"          >
             Publish Vent
           </button>
         </form>

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import TurbineLogo from "./TurbineLogo";
+import { useState } from "react";
 
 function Navbar() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B1020]/80 backdrop-blur-xl">
@@ -29,7 +31,7 @@ function Navbar() {
         </Link>
 
         {/* Navigation */}
-        <div className="flex items-center gap-6 text-slate-300">
+        <div className="hidden items-center gap-6 text-slate-300 md:flex">
           <Link
             to="/"
             className="transition hover:text-white"
@@ -89,7 +91,76 @@ function Navbar() {
             </>
           )}
         </div>
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-3xl text-white md:hidden"
+        >
+          ☰
+        </button>
       </nav>
+      {menuOpen && (
+      <div className="border-t border-white/10 bg-[#0B1020] md:hidden">
+        <div className="flex flex-col p-4 text-slate-300">
+
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="py-3"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/create"
+            onClick={() => setMenuOpen(false)}
+            className="py-3"
+          >
+            Create Vent
+          </Link>
+
+          {user ? (
+            <>
+              <Link
+                to="/profile"
+                onClick={() => setMenuOpen(false)}
+                className="py-3"
+              >
+                Profile
+              </Link>
+
+              <button
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
+                className="py-3 text-left"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="py-3"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                onClick={() => setMenuOpen(false)}
+                className="py-3"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+        </div>
+      </div>
+    )}
     </header>
   );
 }

@@ -19,30 +19,34 @@ function Home() {
   queryFn: () => getVents(selectedEmotion),
 });
   return (
-    <div className="space-y-10">
+    <div className="space-y-8 md:space-y-10">
       
       {/* Hero */}
       
 
-      <section className="relative pb-6 pt-2">
+      <section className="relative py-8 md:py-10">
         <div
             className="pointer-events-none
                     absolute
                     -left-20
                     -top-10
-                    h-72
-                    w-72
+                    h-48
+                    w-48
+                    sm:h-64
+                    sm:w-64
+                    md:h-72
+                    md:w-72
                     rounded-full
-                   bg-violet-500/20
+                    bg-violet-500/20
                     blur-3xl
                     "
         />
 
-          <h1 className="relative bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-6xl font-bold text-transparent">
+          <h1 className="relative bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl md:text-6xl">
             Let it out.
           </h1>
 
-          <p className="relative mt-4 max-w-2xl text-lg text-slate-400">
+          <p className="relative mt-4 max-w-2xl text-base text-slate-400 sm:text-lg">
             A safe place to express emotions,
             share experiences, and connect with
             people who understand.

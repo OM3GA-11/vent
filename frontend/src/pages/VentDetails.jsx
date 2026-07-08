@@ -65,16 +65,16 @@ queryClient.invalidateQueries({
   return (
     <div className="mx-auto max-w-4xl space-y-6">
 
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-        <h1 className="mb-4 text-3xl font-bold">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+        <h1 className="mb-4 text-2xl md:text-3xl break-words font-bold">
           {vent.title}
         </h1>
 
-        <p className="mb-4 text-slate-300">
+        <p className="mb-4 break-words text-sm text-slate-300 md:text-base">
           {vent.content}
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4">
 
   <span className="rounded-full bg-violet-500/20 px-3 py-1 text-sm text-violet-400">
     {vent.emotion}
@@ -91,8 +91,8 @@ queryClient.invalidateQueries({
 </div>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-        <h2 className="mb-4 text-2xl font-semibold">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+        <h2 className="mb-4 text-xl md:text-2xl font-semibold">
           Comments ({vent.comments.length})
         </h2>
         <form
@@ -126,8 +126,7 @@ queryClient.invalidateQueries({
                     from-violet-500
                     via-purple-500
                     to-cyan-500
-                    px-5
-                    py-2
+                    w-full px-5 py-2 md:w-auto
                     font-medium
                     "
                 >
@@ -146,7 +145,7 @@ queryClient.invalidateQueries({
           vent.comments.map((comment) => (
             <div
               key={comment.id}
-              className="mb-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
+              className="mb-4 rounded-2xl border border-white/10 bg-white/5 p-4 md:p-5 transition hover:bg-white/10"
             >
               <div className="mb-3 flex items-center justify-between">
 
@@ -172,7 +171,7 @@ queryClient.invalidateQueries({
 
               </div>
 
-              <p className="leading-relaxed text-slate-300">
+              <p className="break-words leading-relaxed text-sm text-slate-300 md:text-base">
                 {comment.content}
               </p>
 

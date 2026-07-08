@@ -25,14 +25,14 @@ function VentCard({ vent }) {
 });
 
   return (
-    <Link to={`/vents/${vent.id}`} className="block">
+    <Link to={`/vents/${vent.id}`} className="block focus:outline-none">
     <div
       className="
         rounded-2xl
         border
         border-white/10
         bg-white/[0.03]
-        p-6
+        p-4 md:p-6
         backdrop-blur-md
         transition-all
         duration-300
@@ -42,15 +42,15 @@ function VentCard({ vent }) {
         hover:shadow-violet-500/10
       "
     >
-      <h2 className="mb-3 text-xl font-semibold">
+      <h2 className="mb-3 text-lg font-semibold md:text-xl break-words">
         {vent.title}
       </h2>
 
-      <p className="mb-4 text-slate-300">
+      <p className="mb-4 break-words text-sm text-slate-300 md:text-base">
         {vent.content}
       </p>
 
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex flex-wrap items-center gap-2 md:gap-3">
         <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs text-amber-400">
           {vent.emotion}
         </span>
@@ -60,7 +60,7 @@ function VentCard({ vent }) {
         </span>
       </div>
 
-      <div className="flex gap-4 text-slate-400">
+      <div className="flex items-center justify-between text-slate-400">
         <div className="flex items-center gap-2">
 
   <button

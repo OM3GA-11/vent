@@ -30,8 +30,8 @@ function Profile() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-        <h1 className="mb-2 text-3xl font-bold">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+        <h1 className="mb-2 text-2xl font-bold break-words md:text-3xl font-bold">
           {user.username}
         </h1>
 
@@ -48,46 +48,46 @@ function Profile() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <h2 className="text-xl font-semibold">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-semibold">
             Total Vents
           </h2>
 
-          <p className="mt-2 text-4xl font-bold text-violet-400">
+          <p className="mt-2 text-3xl md:text-4xl font-bold text-violet-400">
             {user._count.vents}
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <h2 className="text-xl font-semibold">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-semibold">
             Total Comments
           </h2>
 
-          <p className="mt-2 text-4xl font-bold text-cyan-400">
+          <p className="mt-2 text-3xl md:text-4xl font-bold text-cyan-400">
             {user._count.comments}
           </p>
         </div>
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-xl md:text-2xl font-bold">
           Recent Vents
         </h2>
 
         {user.vents.map((vent) => (
           <div
             key={vent.id}
-            className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+            className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
           >
-            <h3 className="font-semibold">
+            <h3 className="font-semibold break-words">
               {vent.title}
             </h3>
 
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 break-words text-sm text-slate-400 md:text-base">
               {vent.content}
             </p>
 
-            <div className="mt-3 flex gap-4 text-sm text-slate-500">
+            <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-500">
               <span>
                 💬 {vent._count.comments}
               </span>
